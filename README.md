@@ -1,109 +1,127 @@
-# WorkManager API
+![Java](https://img.shields.io/badge/Java-26-orange)
+![Spring Boot](https://img.shields.io/badge/Spring_Boot-3.x-green)
+![MySQL](https://img.shields.io/badge/MySQL-Database-blue)
+![Maven](https://img.shields.io/badge/Maven-Build-red)
+![License](https://img.shields.io/badge/Status-In_Development-yellow)
 
-A RESTful task management API built with Spring Boot, designed to help users create, manage, update, and organize their personal tasks.
+# 📋 WorkManager API
 
-## Overview
+REST API developed with Java and Spring Boot for task management and user organization.
 
-WorkManager is a backend application developed for learning and practicing modern Java development with Spring Boot. The project follows a layered architecture and implements core CRUD operations for users and tasks.
-
-The system allows users to register, authenticate, create tasks, update task information, retrieve task lists, and delete tasks while maintaining ownership validation between users and their tasks.
-
----
-
-## Features
-
-### User Management
-
-* User registration
-* User authentication (login)
-
-### Task Management
-
-* Create new tasks
-* Update existing tasks
-* Delete tasks
-* Retrieve a specific task by ID
-* List all tasks belonging to a user
-* Ownership validation to ensure users can only access their own tasks
+This project was built to practice backend development concepts, focusing on RESTful APIs, layered architecture, business rules implementation, and database integration with MySQL.
 
 ---
 
-## Technologies
+## 🛠️ Technologies Used
 
-* Java 26
+* Java
 * Spring Boot
 * Spring Data JPA
+* Hibernate
 * MySQL
 * Maven
 * Lombok
-* Hibernate
 
 ---
 
-## Project Structure
+## ✨ Features
+
+* User registration
+* User authentication
+* Task creation
+* Task update
+* Task deletion
+* Task retrieval by ID
+* User task listing
+* Task ownership validation
+* MySQL database integration
+* Layered architecture pattern
+
+---
+
+## 🏗️ Project Architecture
+
+The application follows a layered architecture pattern to improve organization, scalability, and maintainability.
+
+### 📚 Layers
+
+* **Controller** → Handles HTTP requests and API endpoints
+* **Service** → Contains business rules and application logic
+* **Repository** → Responsible for database communication
+* **DTO** → Data transfer between application layers
+* **Entity** → Represents database entities
+
+---
+
+## 📁 Project Structure
 
 ```text
-src/main/java
-├── controller
-├── service
-├── repository
-├── dto
-└── entity
+src
+ └── main
+     └── java
+         └── com.ribeiro.WorkManager
+             ├── controller
+             ├── service
+             ├── repository
+             ├── dto
+             └── entity
 ```
 
-### Layer Responsibilities
+---
 
-* **Controller**: Handles HTTP requests and responses.
-* **Service**: Contains business rules and application logic.
-* **Repository**: Provides database access through Spring Data JPA.
-* **DTO**: Transfers data between layers without exposing entities directly.
-* **Entity**: Represents database tables and relationships.
+## ⚙️ Database Configuration
+
+Set your environment variables in the `application.properties` file:
+
+```properties
+spring.datasource.url=${DB_URL}
+spring.datasource.username=${DB_USER}
+spring.datasource.password=${DB_PASSWORD}
+```
+
+Example:
+
+```properties
+DB_URL=jdbc:mysql://localhost:3306/work_manager
+DB_USER=root
+DB_PASSWORD=your_password
+```
 
 ---
 
-## Database Model
+## 🔌 API Endpoints
 
-### User
+### User Management
 
-| Field    | Type   |
-| -------- | ------ |
-| id       | Long   |
-| name     | String |
-| email    | String |
-| password | String |
+| Method | Endpoint | Description |
+|----------|----------|-------------|
+| POST | `/usuarios/cadastro` | Register a new user |
+| POST | `/usuarios/login` | Authenticate a user |
 
-### Task
+### Task Management
 
-| Field       | Type          |
-| ----------- | ------------- |
-| id          | Long          |
-| title       | String        |
-| description | String        |
-| completed   | Boolean       |
-| createdAt   | LocalDateTime |
-| user        | User          |
-
-### Relationship
-
-* One User can have many Tasks.
-* One Task belongs to one User.
+| Method | Endpoint | Description |
+|----------|----------|-------------|
+| POST | `/usuarios/{idUsuario}/tarefas` | Create a task |
+| GET | `/usuarios/{idUsuario}/tarefas` | List all user tasks |
+| GET | `/usuarios/{idUsuario}/tarefas/{idTarefa}` | Retrieve task by ID |
+| PUT | `/usuarios/{idUsuario}/tarefas/{idTarefa}` | Update task |
+| DELETE | `/usuarios/{idUsuario}/tarefas/{idTarefa}` | Delete task |
 
 ---
 
-## Getting Started
+## ▶️ Running the Project
 
 ### Clone the repository
 
 ```bash
-git clone https://github.com/your-username/workmanager.git
+git clone https://github.com/rrosaGeovane/WorkManager.git
 ```
 
-### Configure environment variables
+### Navigate to the project folder
 
-```properties
-DB_URL=jdbc:mysql://localhost:3306/work_manager
-DB_USER=your_user
-DB_PASSWORD=your_password
+```bash
+cd WorkManager
 ```
 
 ### Run the application
@@ -120,53 +138,69 @@ http://localhost:8080
 
 ---
 
-## Current Endpoints
+## 📌 Learning Goals
 
-### User
+This project was developed to strengthen knowledge in:
 
-| Method | Endpoint           |
-| ------ | ------------------ |
-| POST   | /usuarios/cadastro |
-| POST   | /usuarios/login    |
-
-### Tasks
-
-| Method | Endpoint                                 |
-| ------ | ---------------------------------------- |
-| POST   | /usuarios/{idUsuario}/tarefas            |
-| GET    | /usuarios/{idUsuario}/tarefas            |
-| GET    | /usuarios/{idUsuario}/tarefas/{idTarefa} |
-| PUT    | /usuarios/{idUsuario}/tarefas/{idTarefa} |
-| DELETE | /usuarios/{idUsuario}/tarefas/{idTarefa} |
-
----
-
-## Future Improvements
-
-* JWT Authentication
-* Password encryption with BCrypt
-* Global exception handling
-* Bean Validation
-* Unit and integration tests
-* Pagination and sorting
-* API documentation with Swagger/OpenAPI
-
----
-
-## Learning Goals
-
-This project was created to strengthen knowledge in:
-
-* Object-Oriented Programming (OOP)
 * REST API development
 * Spring Boot ecosystem
-* JPA/Hibernate relationships
-* DTO pattern
 * Layered architecture
+* DTO pattern
+* JPA and Hibernate
 * Database integration with MySQL
+* Backend development best practices
 
 ---
 
-## Author
+## 🚀 Future Improvements
 
-Developed by Ribeiro as a personal learning project focused on Java Backend Development and Spring Boot.
+* Password encryption with BCrypt
+* JWT authentication
+* Spring Security integration
+* Request validation with Bean Validation
+* Global exception handling
+* Swagger/OpenAPI documentation
+* Pagination and sorting
+* Unit tests
+* Integration tests
+
+---
+
+## 🤝 Contributing
+
+* Fork the repository
+* Create a feature branch
+
+```bash
+git checkout -b feature/new-feature
+```
+
+* Commit your changes
+
+```bash
+git commit -m "Add new feature"
+```
+
+* Push to your branch
+
+```bash
+git push origin feature/new-feature
+```
+
+* Open a Pull Request
+
+---
+
+## 📧 Contact
+
+**Geovane Rosa**
+
+Email: rrosageovane@gmail.com
+
+GitHub Repository: https://github.com/rrosaGeovane/WorkManager
+
+---
+
+## 📜 License
+
+This project is available for educational and portfolio purposes.
